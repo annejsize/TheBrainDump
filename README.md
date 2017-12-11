@@ -2,7 +2,14 @@
 
 ### Overview
 
-Our idea is to make a bulletin board/reddit kind of social media app for all the things you wish you could say, but can't. The users will create a login, and then be directed to a timeline screen where users can post ideas, pictures, or other files that they wish to share on the internet with each post disappearing after 24 hours.
+This is a social media app, inspired by the likes of Facebook, Instagram, Reddit and so on. Within the app, user is prompted to register. Log-in information is saved to a database via MongoDB. Using Node/Express, based on user inputs, data is saved, updated and/or deleted, and routed to the appropriate pages. The main page comprompise of the 'timeline screen' where users can post ideas, pictures or other files that they wish to share on the Internet. The catch? The post disappears after 24 hours unless the user has accumlate enough likes - the post lives on - or dislikes - the post then disappers.
+
+### Tools Used
+Bulma Framework
+HTML/CSS/Javascript/JQuery
+Node/Express
+MongoDB
+
 
 ### Team
 
@@ -10,5 +17,5 @@ Our idea is to make a bulletin board/reddit kind of social media app for all the
 * Neil Dhand: Backend
 * Felix Moon: Backend / Merging Code
 * Jacob Chaffee: Frontend 
-* Jenna King: Backend / Troubleshoot
+* Jenna King: Frontend / Backend / Troubleshoot
 
