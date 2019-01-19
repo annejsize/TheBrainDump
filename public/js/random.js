@@ -8,7 +8,7 @@ $(document).ready(function() {
     location.href = "/funny";
   });
 
-  $("#random-category").on("click", function() {
+  $("#random").on("click", function() {
     location.href = "/random";
   });
 

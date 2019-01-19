@@ -12,7 +12,7 @@ $(document).ready(function() {
     location.href = "/random";
   });
 
-  $("#gaming-category").on("click", function() {
+  $("#gaming").on("click", function() {
     location.href = "/gaming";
   });
 

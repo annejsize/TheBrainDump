@@ -16,7 +16,7 @@ $(document).ready(function() {
     location.href = "/gaming";
   });
 
-  $("#life-category").on("click", function() {
+  $("#life").on("click", function() {
     location.href = "/life";
   });
 

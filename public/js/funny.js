@@ -4,7 +4,7 @@ $(document).ready(function() {
     location.href = "/main";
   });
 
-  $("#funny-category").on("click", function() {
+  $("#funny").on("click", function() {
     location.href = "/funny";
   });
 

@@ -42,13 +42,14 @@ module.exports = function(app) {
 
     app.get("/login-failureRedirect", function(req, res) {
         res.status(503).json(req.flash('error'));
-    });    
+    });
 
     // Here we've add our isAuthenticated middleware to this route.
     // If a user who is not logged in tries to access this route they will be redirected to the signup page
     app.get("/main", isAuthenticated, function(req, res) {
         db.User.findAll({}).then(function(dbUser) {
             db.Post.findAll({
+                order: [['createdAt', 'DESC']],
                 include: [db.Comment]
             }).then(function(dbPost) {
                 for(var i=0; i<dbPost.length; i++) {
@@ -62,10 +63,10 @@ module.exports = function(app) {
                     posts: dbPost
                 };
 
-                res.render("mainhtml", hbsObject);                
+                res.render("mainhtml", hbsObject);
             });
         });
-        
+
         // res.sendFile(path.join(__dirname, "../public/main.html"));
     });
 
@@ -91,5 +92,122 @@ module.exports = function(app) {
         // res.sendFile(path.join(__dirname, "../public/comments.html"));
     });
 
-};
+    app.get("/all", isAuthenticated, function(req, res) {
+      db.User.findAll({}).then(function(dbUser) {
+          db.Post.findAll({
+              order: [['createdAt', 'DESC']],
+              include: [db.Comment]
+          }).then(function(dbPost) {
+              for(var i=0; i<dbPost.length; i++) {
+                  var user = dbUser.find(x => x.id === dbPost[i].UserId);
+                  dbPost[i].username = user.username;
+                  dbPost[i].lifespan = dbPost[i].timeout - moment().diff(moment(dbPost[i].createdAt), "hours");
+              }
 
+              var hbsObject = {
+                  usernow: req.user,
+                  posts: dbPost
+              };
+
+              res.render("mainhtml", hbsObject);
+          });
+      });
+        // res.sendFile(path.join(__dirname, "../public/new_post.html"));
+    });
+
+    app.get("/life", isAuthenticated, function(req, res) {
+      db.User.findAll({}).then(function(dbUser) {
+          db.Post.findAll({
+              where: {category: "life"},
+              order: [['createdAt', 'DESC']],
+              include: [db.Comment]
+          }).then(function(dbPost) {
+              for(var i=0; i<dbPost.length; i++) {
+                  var user = dbUser.find(x => x.id === dbPost[i].UserId);
+                  dbPost[i].username = user.username;
+                  dbPost[i].lifespan = dbPost[i].timeout - moment().diff(moment(dbPost[i].createdAt), "hours");
+              }
+
+              var hbsObject = {
+                  usernow: req.user,
+                  posts: dbPost
+              };
+
+              res.render("life", hbsObject);
+          });
+      });
+        // res.sendFile(path.join(__dirname, "../public/new_post.html"));
+    });
+    app.get("/funny", isAuthenticated, function(req, res) {
+      db.User.findAll({}).then(function(dbUser) {
+          db.Post.findAll({
+              where: {category: "funny"},
+              order: [['createdAt', 'DESC']],
+              include: [db.Comment]
+          }).then(function(dbPost) {
+              for(var i=0; i<dbPost.length; i++) {
+                  var user = dbUser.find(x => x.id === dbPost[i].UserId);
+                  dbPost[i].username = user.username;
+                  dbPost[i].lifespan = dbPost[i].timeout - moment().diff(moment(dbPost[i].createdAt), "hours");
+              }
+
+              var hbsObject = {
+                  usernow: req.user,
+                  posts: dbPost
+              };
+
+              res.render("funny", hbsObject);
+          });
+      });
+        // res.sendFile(path.join(__dirname, "../public/new_post.html"));
+    });
+
+    app.get("/gaming", isAuthenticated, function(req, res) {
+      db.User.findAll({}).then(function(dbUser) {
+          db.Post.findAll({
+              where: {category: "gaming"},
+              order: [['createdAt', 'DESC']],
+              include: [db.Comment]
+          }).then(function(dbPost) {
+              for(var i=0; i<dbPost.length; i++) {
+                  var user = dbUser.find(x => x.id === dbPost[i].UserId);
+                  dbPost[i].username = user.username;
+                  dbPost[i].lifespan = dbPost[i].timeout - moment().diff(moment(dbPost[i].createdAt), "hours");
+              }
+
+              var hbsObject = {
+                  usernow: req.user,
+                  posts: dbPost
+              };
+
+              res.render("gaming", hbsObject);
+          });
+      });
+        // res.sendFile(path.join(__dirname, "../public/new_post.html"));
+    });
+
+    app.get("/random", isAuthenticated, function(req, res) {
+      db.User.findAll({}).then(function(dbUser) {
+          db.Post.findAll({
+              where: {category: "random"},
+              order: [['createdAt', 'DESC']],
+              include: [db.Comment]
+          }).then(function(dbPost) {
+              for(var i=0; i<dbPost.length; i++) {
+                  var user = dbUser.find(x => x.id === dbPost[i].UserId);
+                  dbPost[i].username = user.username;
+                  dbPost[i].lifespan = dbPost[i].timeout - moment().diff(moment(dbPost[i].createdAt), "hours");
+              }
+
+              var hbsObject = {
+                  usernow: req.user,
+                  posts: dbPost
+              };
+
+              res.render("random", hbsObject);
+          });
+      });
+        // res.sendFile(path.join(__dirname, "../public/new_post.html"));
+    });
+
+};

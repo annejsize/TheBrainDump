@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $("#all-category").on("click", function() {
+  $("#all").on("click", function() {
     location.href = "/main";
   });
 
